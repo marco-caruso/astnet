@@ -92,6 +92,7 @@ def main():
     auc, fpr, tpr = anomaly_util.calculate_auc(config, psnr_list, mat)
 
     # custom
+    # salvataggio output intermedi
     os.makedirs(final_output_dir, exist_ok=True)
     np.save(os.path.join(final_output_dir, "psnr_list.npy"), np.array(psnr_list, dtype=object), allow_pickle=True)
     np.save(os.path.join(final_output_dir, "gt_list.npy"),   np.array(mat, dtype=object), allow_pickle=True)
