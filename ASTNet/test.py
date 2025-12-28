@@ -13,6 +13,9 @@ from models.wresnet1024_cattn_tsm import ASTNet as get_net1
 from models.wresnet2048_multiscale_cattn_tsmplus_layer6 import ASTNet as get_net2
 
 import torch.multiprocessing
+
+import os, numpy as np # custom
+
 torch.multiprocessing.set_sharing_strategy('file_system')
 
 # --cfg experiments/sha/sha_wresnet.yaml --model-file output/shanghai/sha_wresnet/shanghai.pth GPUS [3]
@@ -87,6 +90,14 @@ def main():
     assert len(psnr_list) == len(mat), f'Ground truth has {len(mat)} videos, BUT got {len(psnr_list)} detected videos!'
 
     auc, fpr, tpr = anomaly_util.calculate_auc(config, psnr_list, mat)
+
+    # custom
+    os.makedirs(final_output_dir, exist_ok=True)
+    np.save(os.path.join(final_output_dir, "psnr_list.npy"), np.array(psnr_list, dtype=object), allow_pickle=True)
+    np.save(os.path.join(final_output_dir, "gt_list.npy"),   np.array(mat, dtype=object), allow_pickle=True)
+    np.save(os.path.join(final_output_dir, "roc_fpr.npy"),   np.array(fpr))
+    np.save(os.path.join(final_output_dir, "roc_tpr.npy"),   np.array(tpr))
+    logger.info(f"Saved psnr_list.npy, gt_list.npy, roc_fpr.npy, roc_tpr.npy in {final_output_dir}")
 
     logger.info(f'AUC: {auc * 100:.1f}%')
 
