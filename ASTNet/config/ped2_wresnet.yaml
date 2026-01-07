@@ -4,7 +4,7 @@ PRINT_FREQ: 1
 
 DATASET:
   DATASET: ped2
-  ROOT: '../../datasets'
+  ROOT: '/content/drive/MyDrive/datasets'
   NUM_FRAMES: 5
   FRAME_STEPS: 2
   LOWER_BOUND: 100
