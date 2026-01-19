@@ -3,7 +3,7 @@ WORKERS: 4
 PRINT_FREQ: 1
 
 DATASET:
-  DATASET: split_80-20_astnet
+  DATASET: split_80|20-20_astnet
   ROOT: '/content/drive/MyDrive/datasets/Synth'
   NUM_FRAMES: 5
   FRAME_STEPS: 2
