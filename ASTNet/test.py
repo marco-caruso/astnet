@@ -48,7 +48,7 @@ def main():
     logger.info(pprint.pformat(config))
 
     cudnn.benchmark = config.CUDNN.BENCHMARK
-    cudnn.determinstic = config.CUDNN.DETERMINISTIC
+    cudnn.deterministic = config.CUDNN.DETERMINISTIC
     cudnn.enabled = config.CUDNN.ENABLED
 
     config.defrost()
@@ -57,22 +57,64 @@ def main():
 
     gpus = [(config.GPUS[0])]
     # model = models.get_net(config)
+    
+    #----------------------------------------------
+    #Codice da togliere che non permette il test di dataset al di fuori di ped/shangai/avenue
+    #MODIFICA 1
+    '''
     if config.DATASET.DATASET == "ped2":
         model = get_net1(config, pretrained=False)
     else:
         model = get_net2(config, pretrained=False)
+    '''
+    #---------------------------------------------
+    #Codice per utilizzare anche synth e med
+    # scegli architettura in base al "tipo" di dataset (non al path)
+    dataset_name = config.DATASET.DATASET.lower()
+
+    # Questi dataset devono usare la stessa architettura del pretrained Ped2
+    ped2_like = {"ped2", "synth", "med"}
+
+    if dataset_name in ped2_like:
+        model = get_net1(config, pretrained=False)
+    else:
+        model = get_net2(config, pretrained=False)
+    #-----------------------------------------
     logger.info('Model: {}'.format(model.get_name()))
     model = nn.DataParallel(model, device_ids=gpus).cuda(device=gpus[0])
     logger.info('Epoch: '.format(args.model_file))
 
+    #------------------------------------------
+    #MODIFICA 2
     # load model
+    '''
     state_dict = torch.load(args.model_file)
     if 'state_dict' in state_dict.keys():
         state_dict = state_dict['state_dict']
         model.load_state_dict(state_dict)
     else:
         model.module.load_state_dict(state_dict)
+    '''
+    #È stata modificata la procedura di caricamento dei pesi per renderla compatibile con DataParallel, 
+    #caricando esplicitamente i parametri in model.module ed evitando mismatch tra checkpoint e architettura del modello.
+    ckpt = torch.load(args.model_file, map_location="cpu")
 
+    # alcuni checkpoint salvano dentro "state_dict"
+    if isinstance(ckpt, dict) and "state_dict" in ckpt:
+        sd = ckpt["state_dict"]
+    else:
+        sd = ckpt
+
+    # se le chiavi iniziano con "module." (tipico DataParallel) le ripuliamo
+    if len(sd) > 0 and next(iter(sd)).startswith("module."):
+        sd = {k.replace("module.", "", 1): v for k, v in sd.items()}
+
+    # carichiamo sempre dentro model.module
+    model.module.load_state_dict(sd, strict=True)
+
+
+    #------------------------------------------
+    
     test_dataset = eval('datasets.get_test_data')(config)
 
     test_loader = torch.utils.data.DataLoader(
@@ -118,7 +160,11 @@ def inference(config, data_loader, model):
 
             # compute the output
             video, video_name = train_util.decode_input(input=data, train=False)
-            video = [frame.to(device=config.GPUS[0]) for frame in video]
+            #Modifica 3
+            #video = [frame.to(device=config.GPUS[0]) for frame in video]
+            device = next(model.parameters()).device
+            video = [frame.to(device=device) for frame in video]
+
             for f in tqdm.tqdm(range(len(video) - fp)):
                 inputs = video[f:f + fp]
                 output = model(inputs)
