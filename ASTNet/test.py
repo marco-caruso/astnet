@@ -73,7 +73,7 @@ def main():
     dataset_name = config.DATASET.DATASET.lower()
 
     # Questi dataset devono usare la stessa architettura del pretrained Ped2
-    ped2_like = {"ped2", "synth", "med", "split_80-20-20_astnet","split_80-20-100_astnet"}
+    ped2_like = {"ped2", "synth", "med", "MED", "split_80-20-20_astnet","split_80-20-100_astnet"}
 
     if dataset_name in ped2_like:
         model = get_net1(config, pretrained=False)
