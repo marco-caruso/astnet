@@ -3,7 +3,7 @@ WORKERS: 4
 PRINT_FREQ: 1
 
 DATASET:
-  DATASET: med
+  DATASET: MED
   ROOT: '/content/drive/MyDrive/datasets'
   NUM_FRAMES: 5
   FRAME_STEPS: 2
