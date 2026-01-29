@@ -1,5 +1,5 @@
-GPUS: (0,1,2,3)
-WORKERS: 2 #if 4 doesn't work, try 0 or 1
+GPUS: (0,)
+WORKERS: 0 #if 4 doesn't work, try 0 or 1
 PRINT_FREQ: 1
 
 DATASET:
