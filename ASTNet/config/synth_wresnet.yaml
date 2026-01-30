@@ -26,7 +26,7 @@ TEST:
 MODEL:
   NAME: 'wrn38'
   INIT_WEIGHTS: true
-  PRETRAINED: '../../datasets/seg_weights/wider_resnet38.pth.tar'
+  PRETRAINED: '/content/astnet/datasets/seg_weights/wider_resnet38.pth.tar' #'../../datasets/seg_weights/wider_resnet38.pth.tar'
   IMAGE_SIZE:
     - 224
     - 288
