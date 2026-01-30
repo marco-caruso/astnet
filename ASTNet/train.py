@@ -44,10 +44,11 @@ def main():
     cudnn.determinstic = config.CUDNN.DETERMINISTIC
     cudnn.enabled = config.CUDNN.ENABLED
 
-    if config.DATASET.DATASET == "ped2":
-        model = get_net1(config)
+    #Modifica. Prima l'archiettura piccaola veniva usata solo per ped2
+    if config.DATASET.DATASET in ["ped2", "synth", "med","ped2_synth"]:
+        model = get_net1(config)  # wresnet1024 (architettura piccola)
     else:
-        model = get_net2(config)
+        model = get_net2(config)  # wresnet2048 (architettura grande)
 
     logger.info('Model: {}'.format(model.get_name()))
 
