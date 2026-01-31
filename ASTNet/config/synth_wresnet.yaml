@@ -1,24 +1,24 @@
 GPUS: (0,) #(0,1,2,3)
-WORKERS: 8 #2 #4
-PRINT_FREQ: 100
+WORKERS: 4 #2 
+PRINT_FREQ: 20
 
 DATASET:
   DATASET: synth #split_80-20-20_astnet
   ROOT: '/content/astnet/data/' #'/content/drive/MyDrive/datasets/Synth'
-  NUM_FRAMES: 5
-  FRAME_STEPS: 2
+  NUM_FRAMES: 5 #5-1: frames persi per ogni video
+  FRAME_STEPS: 5 #da 2->5: finestra da 5 frames diminuendo le tempistiche
   LOWER_BOUND: 0
 
 TRAIN:
-  BATCH_SIZE_PER_GPU: 8 #2
+  BATCH_SIZE_PER_GPU: 4 #2
   SHUFFLE: true
   BEGIN_EPOCH: 0
-  END_EPOCH: 120
-  RESUME: true
+  END_EPOCH: 50
+  RESUME: false #inserire true solo se si vuole partire da qualche checkpoint
   OPTIMIZER: 'adam'
   LR_TYPE: 'multistep'
   LR: 0.0002
-  LR_STEP: [80,100]
+  LR_STEP: [30,40] #[80,100]
 
 TEST:
   BATCH_SIZE_PER_GPU: 1
