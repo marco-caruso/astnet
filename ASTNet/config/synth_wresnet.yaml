@@ -15,7 +15,7 @@ TRAIN:
   SHUFFLE: true
   BEGIN_EPOCH: 0
   END_EPOCH: 50
-  RESUME: false #inserire true solo se si vuole partire da qualche checkpoint
+  RESUME: true #inserire true solo se si vuole partire da qualche checkpoint
   OPTIMIZER: 'adam'
   LR_TYPE: 'multistep'
   LR: 0.0002
