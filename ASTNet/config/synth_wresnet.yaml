@@ -16,6 +16,7 @@ TRAIN:
   BEGIN_EPOCH: 0
   END_EPOCH: 50
   RESUME: true #inserire true solo se si vuole partire da qualche checkpoint
+  CHECKPOINT: '/content/astnet/ASTNet/output/synth/synth_wresnet/epoch_10.pth'
   OPTIMIZER: 'adam'
   LR_TYPE: 'multistep'
   LR: 0.0002
