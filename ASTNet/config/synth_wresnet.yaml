@@ -13,14 +13,14 @@ DATASET:
 TRAIN:
   BATCH_SIZE_PER_GPU: 4 #2
   SHUFFLE: true
-  BEGIN_EPOCH: 30
+  BEGIN_EPOCH: 40
   END_EPOCH: 50
   RESUME: true #inserire true solo se si vuole partire da qualche checkpoint
-  CHECKPOINT: '/content/astnet/ASTNet/output/synth/synth_wresnet/epoch_30.pth'
+  CHECKPOINT: '/content/astnet/ASTNet/output/synth/synth_wresnet/epoch_40.pth'
   OPTIMIZER: 'adam'
   LR_TYPE: 'multistep'
-  LR: 0.0001 #0.0002
-  LR_STEP: [40] #[30,40] [80,100]
+  LR: 0.00005 #0.0002
+  LR_STEP: [] #[30,40] [80,100]
 
 TEST:
   BATCH_SIZE_PER_GPU: 1
