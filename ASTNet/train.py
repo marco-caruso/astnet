@@ -47,7 +47,7 @@ def main():
     #Modifica. Prima l'archiettura piccaola veniva usata solo per ped2
     if config.DATASET.DATASET in ["ped2", "synth", "med","ped2_synth"]:
         model = get_net1(config)  # wresnet1024 (architettura piccola)
-        checkpoint_path = '/content/astnet/ASTNet/output/synth/synth_wresnet/epoch_30.pth' #Cambiare ogni volta
+        checkpoint_path = '/content/astnet/ASTNet/output/synth/synth_wresnet/epoch_40.pth' #Cambiare ogni volta
         print(f"=> FORZANDO IL CARICAMENTO DEI PESI DA: {checkpoint_path}")
         checkpoint = torch.load(checkpoint_path, map_location='cpu')
         # Gestiamo sia se il file ha 'state_dict' sia se ha i pesi diretti
