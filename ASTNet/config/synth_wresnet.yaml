@@ -1,6 +1,6 @@
 GPUS: (0,) #(0,1,2,3)
-WORKERS: 4 #2 
-PRINT_FREQ: 20
+WORKERS: 2 #2 
+PRINT_FREQ: 1 #20
 SAVE_CHECKPOINT_FREQ: 1
 
 DATASET:
@@ -13,14 +13,14 @@ DATASET:
 TRAIN:
   BATCH_SIZE_PER_GPU: 4 #2
   SHUFFLE: true
-  BEGIN_EPOCH: 40
+  BEGIN_EPOCH: 0
   END_EPOCH: 50
   RESUME: true #inserire true solo se si vuole partire da qualche checkpoint
-  CHECKPOINT: '/content/astnet/ASTNet/output/synth/synth_wresnet/epoch_40.pth'
+  #CHECKPOINT: '/content/astnet/ASTNet/output/synth/synth_wresnet/epoch_40.pth'
   OPTIMIZER: 'adam'
   LR_TYPE: 'multistep'
-  LR: 0.00005 #0.0002
-  LR_STEP: [] #[30,40] [80,100]
+  LR: 0.0002
+  LR_STEP: [30,40] #[30,40] [80,100]
 
 TEST:
   BATCH_SIZE_PER_GPU: 1
