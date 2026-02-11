@@ -1,0 +1,38 @@
+GPUS: (0,)
+WORKERS: 2 #if 4 doesn't work, try 0 or 1
+PRINT_FREQ: 20
+
+DATASET:
+  DATASET: ped2_synth_2
+  ROOT: '/content/astnet/data/' 
+  NUM_FRAMES: 5
+  FRAME_STEPS: 2
+  LOWER_BOUND: 0
+
+TRAIN:
+  BATCH_SIZE_PER_GPU: 2
+  SHUFFLE: true
+  BEGIN_EPOCH: 0
+  END_EPOCH: 80
+  RESUME: false #mettere true per i successivi checkpoint
+  #CHECKPOINT: '/content/astnet/ASTNet/output/ped2_synth/ped2_synth_wresnet/epoch_32.pth'
+  OPTIMIZER: 'adam'
+  LR_TYPE: 'multistep'
+  LR: 0.0002 #0.0001, 0.00005
+  LR_STEP: [50,65]
+
+TEST:
+  BATCH_SIZE_PER_GPU: 1
+
+MODEL:
+  NAME: 'wrn38'
+  INIT_WEIGHTS: true
+  PRETRAINED: '/content/astnet/ASTNet/datasets/seg_weights/wider_resnet38.pth'
+  IMAGE_SIZE:
+    - 224
+    - 288
+  MEMORY_SIZE: 5
+  ENCODED_FRAMES: 4
+  DECODED_FRAMES: 0
+  EXTRA:
+    FINAL_CONV_KERNEL: 3
