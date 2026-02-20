@@ -1,6 +1,6 @@
 GPUS: (0,) #(0,1,2,3)
 WORKERS: 2 #4
-PRINT_FREQ: 1
+PRINT_FREQ: 20
 
 DATASET:
   DATASET: ped2
@@ -13,12 +13,12 @@ TRAIN:
   BATCH_SIZE_PER_GPU: 2
   SHUFFLE: true
   BEGIN_EPOCH: 0
-  END_EPOCH: 120
-  RESUME: true
+  END_EPOCH: 40
+  RESUME: false
   OPTIMIZER: 'adam'
   LR_TYPE: 'multistep'
   LR: 0.0002
-  LR_STEP: [80,100]
+  LR_STEP: [50, 65]
 
 TEST:
   BATCH_SIZE_PER_GPU: 1
