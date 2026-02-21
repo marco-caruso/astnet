@@ -49,7 +49,7 @@ def main():
         model = get_net1(config)  # wresnet1024 (architettura piccola)
         #Il codice sottostante serve solamente quando dobbiamo partire da un checkpoint preciso per conitnuare il training
         
-        checkpoint_path = '/content/astnet/ASTNet/output/ped2_synth_2/ped2_synth_2_wresnet/epoch_17.pth' #Cambiare ogni volta
+        checkpoint_path = '/content/astnet/ASTNet/output/ped2/ped2_wresnet/epoch_33.pth' #Cambiare ogni volta
         print(f"=> FORZANDO IL CARICAMENTO DEI PESI DA: {checkpoint_path}")
         checkpoint = torch.load(checkpoint_path, map_location='cpu')
         # Gestiamo sia se il file ha 'state_dict' sia se ha i pesi diretti
