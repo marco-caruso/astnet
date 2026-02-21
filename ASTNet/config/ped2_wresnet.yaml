@@ -14,7 +14,7 @@ TRAIN:
   SHUFFLE: true
   BEGIN_EPOCH: 0
   END_EPOCH: 40
-  RESUME: false
+  RESUME: true
   OPTIMIZER: 'adam'
   LR_TYPE: 'multistep'
   LR: 0.0002
@@ -26,7 +26,7 @@ TEST:
 MODEL:
   NAME: 'wrn38'
   INIT_WEIGHTS: true
-  PRETRAINED: '../../datasets/seg_weights/wider_resnet38.pth'
+  PRETRAINED: '/content/astnet/ASTNet/datasets/seg_weights/wider_resnet38.pth'
   IMAGE_SIZE:
     - 224
     - 288
