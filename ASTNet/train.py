@@ -45,7 +45,7 @@ def main():
     cudnn.enabled = config.CUDNN.ENABLED
 
     #Modifica. Prima l'archiettura piccaola veniva usata solo per ped2
-    if config.DATASET.DATASET in ["ped2", "synth", "med","ped2_synth","ped2_synth_2"]:
+    if config.DATASET.DATASET in ["ped2", "synth", "med","ped2_synth","ped2_synth_2","ped2_synth_random","ped2_synth_2_random"]:
         model = get_net1(config)  # wresnet1024 (architettura piccola)
         #Il codice sottostante serve solamente quando dobbiamo partire da un checkpoint preciso per conitnuare il training
         '''
