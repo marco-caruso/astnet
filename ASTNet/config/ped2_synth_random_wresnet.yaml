@@ -14,8 +14,8 @@ TRAIN:
   SHUFFLE: true
   BEGIN_EPOCH: 0
   END_EPOCH: 40
-  RESUME: false #mettere true per i successivi checkpoint
-  #CHECKPOINT: '/content/astnet/ASTNet/output/ped2_synth_2/ped2_synth_2_wresnet/epoch_17.pth'
+  RESUME: true #mettere true per i successivi checkpoint
+  CHECKPOINT: '/content/astnet/ASTNet/output/ped2_synth_random/ped2_synth_random_wresnet/epoch_33.pth'
   OPTIMIZER: 'adam'
   LR_TYPE: 'multistep'
   LR: 0.0002 #0.0001, 0.00005
