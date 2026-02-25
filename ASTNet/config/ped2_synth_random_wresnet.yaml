@@ -12,7 +12,7 @@ DATASET:
 TRAIN:
   BATCH_SIZE_PER_GPU: 2
   SHUFFLE: true
-  BEGIN_EPOCH: 0
+  BEGIN_EPOCH: 33
   END_EPOCH: 40
   RESUME: true #mettere true per i successivi checkpoint
   CHECKPOINT: '/content/astnet/ASTNet/output/ped2_synth_random/ped2_synth_random_wresnet/epoch_33.pth'
