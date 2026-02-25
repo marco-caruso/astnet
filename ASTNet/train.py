@@ -48,15 +48,15 @@ def main():
     if config.DATASET.DATASET in ["ped2", "synth", "med","ped2_synth","ped2_synth_2","ped2_synth_random","ped2_synth_2_random"]:
         model = get_net1(config)  # wresnet1024 (architettura piccola)
         #Il codice sottostante serve solamente quando dobbiamo partire da un checkpoint preciso per conitnuare il training
-        '''
-        checkpoint_path = '/content/astnet/ASTNet/output/ped2/ped2_wresnet/epoch_33.pth' #Cambiare ogni volta
+        
+        checkpoint_path = '/content/astnet/ASTNet/output/ped2_synth_random/ped2_synth_random_wresnet/epoch_33.pth' #Cambiare ogni volta
         print(f"=> FORZANDO IL CARICAMENTO DEI PESI DA: {checkpoint_path}")
         checkpoint = torch.load(checkpoint_path, map_location='cpu')
         # Gestiamo sia se il file ha 'state_dict' sia se ha i pesi diretti
         state_dict = checkpoint['state_dict'] if 'state_dict' in checkpoint else checkpoint
         model.load_state_dict(state_dict, strict=False)
         print("=> PESI CARICATI CON SUCCESSO!")
-        '''
+        
         
     else:
         model = get_net2(config)  # wresnet2048 (architettura grande)
