@@ -7,7 +7,7 @@ DATASET:
   ROOT: '/content/astnet/data/' 
   NUM_FRAMES: 5
   FRAME_STEPS: 2
-  LOWER_BOUND: 0
+  LOWER_BOUND: 100
 
 TRAIN:
   BATCH_SIZE_PER_GPU: 2
